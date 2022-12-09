@@ -1,0 +1,39 @@
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+
+  .logo {
+    display: flex;
+    align-items: center;
+
+    img {
+      max-width: 100%;
+      width: 200px;
+    }
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1em;
+
+    .item {
+      display: flex;
+      align-items: center;
+      column-gap: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      color: var(--dark-green);
+    }
+
+    .item:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// .main-nav a.router-link-exact-active {
+//   color: #42b983;
+// }
