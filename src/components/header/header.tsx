@@ -1,7 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import AppLogo from "../../assets/logo.png";
+import * as loginActions from "../../store/slices/login"
 
 import "./header.scss";
 
@@ -11,6 +13,8 @@ type HeaderProps = {
 };
 
 function Header({ isLoggued, userName }: HeaderProps) {
+  const dispatch = useDispatch();
+
   return (
     <nav className="main-nav">
       <Link className="logo" to="/">
@@ -24,7 +28,7 @@ function Header({ isLoggued, userName }: HeaderProps) {
               <i className="fa fa-user-circle"></i>
               {userName!}
             </Link>
-            <Link className="item" to="/">
+            <Link className="item" to="/" onClick={() => dispatch(loginActions.toggle())}>
               <i className="fa fa-sign-out"></i>
               Sign Out
             </Link>

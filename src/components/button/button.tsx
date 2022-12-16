@@ -6,12 +6,15 @@ import "./button.scss";
 type ButtonProps = {
   label: string;
   hugContent: boolean;
+  onClick?: () => void;
 };
 
-function Button({ label, hugContent = true }: ButtonProps) {
+function Button({ label, hugContent = true, onClick = () => {} }: ButtonProps) {
   return (
     <Link to="/user">
-      <button className={hugContent ? "button" : "button fill"}>{label}</button>
+      <button 
+      onClick= {onClick}
+      className={hugContent ? "button" : "button fill"}>{label}</button>
     </Link>
   );
 }

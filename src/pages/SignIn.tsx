@@ -2,8 +2,12 @@ import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
 import Input from "../components/input/input";
 import Button from "../components/button/button";
+import { useDispatch } from "react-redux";
+import * as loginActions from "../store/slices/login"
 
 function SignIn() {
+  const dispatch = useDispatch();
+
   return (
     <>
       <Header isLoggued={false}></Header>
@@ -18,7 +22,7 @@ function SignIn() {
               <input type="checkbox" id="remember-me" />
               <label htmlFor="remember-me">Remember me</label>
             </div>
-            <Button label={"Sign In"} hugContent={false}></Button>
+            <Button onClick={() => dispatch(loginActions.toggle())} label={"Sign In"} hugContent={false}></Button>
           </form>
         </section>
       </main>
