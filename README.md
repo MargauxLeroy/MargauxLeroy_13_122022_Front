@@ -20,6 +20,7 @@ Argent Bank : Tableau de bord de suivi sportif. Projet OpenClassrooms. Décembre
 ### Backend
 
 - Clone repository : `git clone https://github.com/MargauxLeroy/MargauxLeroy_13_122022`
+- Launch MongoDB on terminal : `brew services start mongodb-community`
 - Launch on [localhost:3000](http://localhost:3000) : `npm run start`
 
 ### Frontend

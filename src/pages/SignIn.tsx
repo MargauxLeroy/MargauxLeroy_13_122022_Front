@@ -3,10 +3,17 @@ import Footer from "../components/footer/footer";
 import Input from "../components/input/input";
 import Button from "../components/button/button";
 import { useDispatch } from "react-redux";
-import * as loginActions from "../store/slices/login"
+import { authActions } from "../store/reducers/auth";
+import { Credentials } from "../services/login";
+import { useState } from "react";
 
 function SignIn() {
   const dispatch = useDispatch();
+
+  const [credentials, setCredentials] = useState<Credentials>({
+    email: "",
+    password: "",
+  });
 
   return (
     <>
@@ -16,13 +23,31 @@ function SignIn() {
           <i className="fa fa-user-circle sign-in-icon"></i>
           <h1>Sign In</h1>
           <form>
-            <Input label={"username"}></Input>
-            <Input label={"password"}></Input>
+            <Input
+              label={"username"}
+              onChange={(e) =>
+                setCredentials({ ...credentials, email: e.target.value })
+              }
+            ></Input>
+            <Input
+              label={"password"}
+              onChange={(e) =>
+                setCredentials({ ...credentials, password: e.target.value })
+              }
+            ></Input>
             <div className="input-remember">
               <input type="checkbox" id="remember-me" />
               <label htmlFor="remember-me">Remember me</label>
             </div>
-            <Button onClick={() => dispatch(loginActions.toggle())} label={"Sign In"} hugContent={false}></Button>
+            <Button
+              onClick={async (e) => {
+                e.preventDefault();
+                // @ts-ignore // ?
+                dispatch(authActions.login(credentials));
+              }}
+              label={"Sign In"}
+              hugContent={false}
+            ></Button>
           </form>
         </section>
       </main>
