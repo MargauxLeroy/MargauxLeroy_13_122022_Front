@@ -2,19 +2,33 @@ import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
 import Button from "../components/button/button";
 import Account, { AccountProps } from "../components/account/account";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "../store/store";
+import { UserData } from "../services/profil";
+import { useEffect } from "react";
+import { authActions } from "../store/reducers/auth";
 
 function User() {
-  const userName = "Tony Jarvis";
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // @ts-ignore
+    dispatch(authActions.profile());
+  }, [dispatch]);
+
+  const userData = useSelector<AppState, UserData | undefined>(
+    (state) => state.auth.userData
+  );
 
   return (
     <>
-      <Header isLoggued={true} userName={userName.split(" ")[0]}></Header>
+      <Header isLoggued={true} userName={userData?.firstName}></Header>
       <main className="page-user bg-dark main">
         <div className="header">
           <h1>
             Welcome back
             <br />
-            {userName}!
+            {userData?.firstName + " " + userData?.lastName}!
           </h1>
           <Button label="Edit Name" hugContent={true}></Button>
         </div>

@@ -4,9 +4,13 @@ import { loginReducer } from "./reducers/auth";
 
 export const store = configureStore({
   reducer: {
-    login: loginReducer,
+    auth: loginReducer,
   },
   middleware: (getDefaultMiddleware) => {
-    return [...getDefaultMiddleware(), routingActor];
+    return [routingActor, ...getDefaultMiddleware()];
   },
 });
+
+export type AppDispatch = typeof store.dispatch;
+export type AppStore = typeof store;
+export type AppState = ReturnType<typeof store.getState>;
