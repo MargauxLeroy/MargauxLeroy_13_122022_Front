@@ -1,6 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Credentials, apiLogin } from "../../services/login";
-import { apiProfile, UserData, UserDataExtended } from "../../services/profil";
+import {
+  apiProfile,
+  apiUpdateProfile,
+  UserData,
+  UserDataExtended,
+} from "../../services/profil";
 import { AppState } from "../store";
 
 type Auth = {
@@ -49,7 +54,7 @@ export const profile = createAsyncThunk<
     state: AppState;
   }
 >("auth/profile", async (_, thunkAPI) => {
-  /// TODO: Get token for fetching user data
+  /// Get token for fetching user data
   const token = thunkAPI.getState().auth.login.token;
 
   if (token == null) {
@@ -59,6 +64,28 @@ export const profile = createAsyncThunk<
   /// Fetch user data from API
   const userData = await apiProfile(token);
 
+  return userData;
+});
+
+/// Update Profil Async
+export const updateProfile = createAsyncThunk<
+  UserDataExtended,
+  UserData,
+  {
+    state: AppState;
+  }
+>("auth/updateProfile", async (updatedUserData: UserData, thunkAPI) => {
+  /// Get token for fetching user data
+  const token = thunkAPI.getState().auth.login.token;
+
+  if (token == null) {
+    throw new Error("Empty token");
+  }
+
+  /// Fetch user data from API
+  const userData = await apiUpdateProfile(token, updatedUserData);
+
+  console.log(userData);
   return userData;
 });
 
@@ -124,6 +151,31 @@ const { actions: sliceActions, reducer: sliceReducer } = createSlice({
         error: "Unknown Error",
       };
     });
+    /// Update Profile
+    builder.addCase(updateProfile.pending, (state) => {
+      state.isLoading = true;
+      state.userData = {
+        firstName: "",
+        lastName: "",
+      };
+    });
+    builder.addCase(updateProfile.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.userData = {
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+      };
+    });
+    // TODO: Rejected case
+    builder.addCase(updateProfile.rejected, (state, action) => {
+      state.isLoading = false;
+
+      state.login = {
+        status: "DISCONNECTED",
+        token: null,
+        error: "Unknown Error",
+      };
+    });
   },
 });
 
@@ -131,6 +183,7 @@ export const authActions = {
   ...sliceActions,
   login: login,
   profile: profile,
+  updateProfile: updateProfile,
 };
 
 export const loginReducer = sliceReducer;

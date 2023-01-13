@@ -42,7 +42,7 @@ function SignIn() {
             <Button
               onClick={async (e) => {
                 e.preventDefault();
-                // @ts-ignore // ?
+                // @ts-ignore // TODO: sup le msg
                 dispatch(authActions.login(credentials));
               }}
               label={"Sign In"}

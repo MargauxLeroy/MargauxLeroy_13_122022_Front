@@ -7,11 +7,9 @@ import "./App.scss";
 import { router } from "./store/actors/routing";
 
 function App() {
-  /// TODO : Router v6 -> ok
-
   /// TODO :
   /// 1. Récup le token -> ok
-  /// 2. Log
+  /// 2. Log -> ok
   /// 3. Set les infos
 
   return (

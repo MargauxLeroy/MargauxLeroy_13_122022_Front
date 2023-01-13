@@ -131,4 +131,19 @@
       text-align: center;
     }
   }
+
+  .form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .inputs,
+    .actions {
+      display: flex;
+      flex-direction: row;
+      column-gap: 0.5rem;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }
