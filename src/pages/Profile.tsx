@@ -2,15 +2,15 @@ import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
 import Button from "../components/button/button";
 import Account, { AccountProps } from "../components/account/account";
-import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "../store/store";
+import { useSelector } from "react-redux";
+import { AppState, useAppDispatch } from "../store/store";
 import { UserData } from "../services/profil";
 import { useEffect, useState } from "react";
 import { authActions } from "../store/reducers/auth";
 import Input from "../components/input/input";
 
 function Profile() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const stateUserData = useSelector<AppState, UserData | undefined>(
     (state) => state.auth.userData
@@ -21,7 +21,6 @@ function Profile() {
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(authActions.profile());
   }, [dispatch]);
 
@@ -68,10 +67,8 @@ function Profile() {
                       lastName: updateLastName,
                     };
 
-                    // @ts-ignore
                     dispatch(authActions.updateProfile(newProfile));
 
-                    // @ts-ignore
                     dispatch(authActions.profile());
 
                     setIsBeingUpdated(false);

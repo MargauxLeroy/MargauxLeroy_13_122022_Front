@@ -1,13 +1,8 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { Credentials, apiLogin } from "../../services/login";
-import {
-  apiProfile,
-  apiUpdateProfile,
-  UserData,
-  UserDataExtended,
-} from "../../services/profil";
-import { AppState } from "../store";
+import { createSlice } from "@reduxjs/toolkit";
+import { UserData } from "../../services/profil";
+import { login, profile, updateProfile } from "./thunks";
 
+/// Création du type de l'Auth
 type Auth = {
   isLoading: boolean;
   login:
@@ -23,6 +18,7 @@ type Auth = {
   userData?: UserData;
 };
 
+/// Création du state initial de l'application
 const initialState: Auth = {
   isLoading: false,
   login: {
@@ -31,64 +27,7 @@ const initialState: Auth = {
   },
 };
 
-/// Login Async
-export const login = createAsyncThunk(
-  "auth/login",
-  async (credentials: Credentials) => {
-    /// Fetch token from API
-    const token = await apiLogin(credentials);
-
-    if (token == null) {
-      throw new Error("Empty token");
-    }
-
-    return token;
-  }
-);
-
-/// Profile Async
-export const profile = createAsyncThunk<
-  UserDataExtended,
-  undefined,
-  {
-    state: AppState;
-  }
->("auth/profile", async (_, thunkAPI) => {
-  /// Get token for fetching user data
-  const token = thunkAPI.getState().auth.login.token;
-
-  if (token == null) {
-    throw new Error("Empty token");
-  }
-
-  /// Fetch user data from API
-  const userData = await apiProfile(token);
-
-  return userData;
-});
-
-/// Update Profil Async
-export const updateProfile = createAsyncThunk<
-  UserDataExtended,
-  UserData,
-  {
-    state: AppState;
-  }
->("auth/updateProfile", async (updatedUserData: UserData, thunkAPI) => {
-  /// Get token for fetching user data
-  const token = thunkAPI.getState().auth.login.token;
-
-  if (token == null) {
-    throw new Error("Empty token");
-  }
-
-  /// Fetch user data from API
-  const userData = await apiUpdateProfile(token, updatedUserData);
-
-  console.log(userData);
-  return userData;
-});
-
+/// Création du reducer et des actions
 const { actions: sliceActions, reducer: sliceReducer } = createSlice({
   name: "auth",
   initialState: initialState,
@@ -102,7 +41,7 @@ const { actions: sliceActions, reducer: sliceReducer } = createSlice({
     },
   },
   extraReducers: (builder) => {
-    /// Login
+    /// Login ///
     builder.addCase(login.pending, (state) => {
       state.isLoading = true;
     });
@@ -130,7 +69,7 @@ const { actions: sliceActions, reducer: sliceReducer } = createSlice({
         };
       }
     });
-    /// Profile
+    /// Profile ///
     builder.addCase(profile.pending, (state) => {
       state.isLoading = true;
     });
@@ -150,7 +89,7 @@ const { actions: sliceActions, reducer: sliceReducer } = createSlice({
         error: "L'adresse mail ou le mot de passe est incorrect",
       };
     });
-    /// Update Profile
+    /// Update Profile ///
     builder.addCase(updateProfile.pending, (state) => {
       state.isLoading = true;
     });

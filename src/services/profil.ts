@@ -18,10 +18,10 @@ type ProfileResponse = {
   body: UserDataExtended;
 };
 
-export const apiProfile = async (token: string) => {
+/// Récupèration des données de l'utilisateur depuis l'API
+export const apiProfile = async (token: string): Promise<UserDataExtended> => {
   const uri = `${process.env.REACT_APP_API_V1_URL}/user/profile`;
 
-  /// We fetch the user data from the API
   const response = await fetchData<ProfileResponse>(uri, {
     method: "POST",
     headers: {
@@ -32,19 +32,20 @@ export const apiProfile = async (token: string) => {
   return response.body;
 };
 
+/// Mise à jour des informations utilisateur vers l'API
 export const apiUpdateProfile = async (
   token: string,
   updatedUserData: UserData
-) => {
+): Promise<UserDataExtended> => {
   const uri = `${process.env.REACT_APP_API_V1_URL}/user/profile`;
 
-  /// We send the new user data to the API
   const response = await fetchData<ProfileResponse>(uri, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
+    // Envoi des nouvelles informations de l'utilisateur
     body: JSON.stringify(updatedUserData),
   });
 

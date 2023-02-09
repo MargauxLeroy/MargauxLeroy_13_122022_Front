@@ -2,14 +2,14 @@ import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
 import Input from "../components/input/input";
 import Button from "../components/button/button";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { authActions } from "../store/reducers/auth";
 import { Credentials } from "../services/login";
 import { useState } from "react";
-import { AppState } from "../store/store";
+import { AppState, useAppDispatch } from "../store/store";
 
 function SignIn() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const errorMessage = useSelector<AppState, string | null>((state) => {
     if (state.auth.login.status === "DISCONNECTED") {
@@ -52,7 +52,6 @@ function SignIn() {
             <Button
               onClick={async (e) => {
                 e.preventDefault();
-                // @ts-ignore // TODO: sup le msg
                 dispatch(authActions.login(credentials));
               }}
               label={"Sign In"}

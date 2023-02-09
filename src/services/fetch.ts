@@ -1,8 +1,4 @@
-/**
- * Function that will fetch the URI
- * @param uri
- * @returns { Promise<any> }
- */
+/// Fonction générale de fetch
 export const fetchData = async <T>(
   uri: string,
   init?: RequestInit | undefined

@@ -3,7 +3,9 @@ import Feature, { FeatureProps } from "../components/feature/feature";
 import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
 
-// import IconChat from "assets/icons/icon-chat.png";
+import IconChat from "../assets/icons/icon-chat.png";
+import IconMoney from "../assets/icons/icon-money.png";
+import IconSecurity from "../assets/icons/icon-security.png";
 
 function Index() {
   return (
@@ -26,8 +28,7 @@ function Index() {
           {featureItems.map((e, index) => (
             <Feature
               key={index}
-              // icon={e.icon}
-              icon="./../assets/icons/icon-chat.png"
+              icon={e.icon}
               title={e.title}
               description={e.description}
             ></Feature>
@@ -46,21 +47,18 @@ const featureItems: FeatureProps[] = [
     title: "You are our #1 priority",
     description:
       "Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes.",
-    icon: "../assets/icons/icon-chat.png",
-    // icon: IconChat,
+    icon: IconChat,
   },
   {
     title: "More savings means higher rates",
     description:
       "The more you save with us, the higher your interest rate will be! ",
-    icon: "../assets/icons/icon-security.png",
-    // icon: IconChat,
+    icon: IconMoney,
   },
   {
     title: "Security you can trust",
     description:
       "We use top of the line encryption to make sure your data and money is always safe.",
-    icon: "../assets/icons/icon-money.png",
-    // icon: IconChat,
+    icon: IconSecurity,
   },
 ];

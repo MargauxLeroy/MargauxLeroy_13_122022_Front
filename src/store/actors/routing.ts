@@ -18,7 +18,7 @@ export const routingActor =
       router.navigate("/user");
     }
     if (login.rejected.match(action)) {
-      /// Message d'erreur géré dans le reducer
+      /// Le message d'erreur géré dans le reducer
     }
     if (logout.match(action)) {
       router.navigate("/");
