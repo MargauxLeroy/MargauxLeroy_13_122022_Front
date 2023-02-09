@@ -75,12 +75,13 @@ const { actions: sliceActions, reducer: sliceReducer } = createSlice({
     });
     builder.addCase(profile.fulfilled, (state, action) => {
       state.isLoading = false;
+
       state.userData = {
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
       };
     });
-    builder.addCase(profile.rejected, (state, action) => {
+    builder.addCase(profile.rejected, (state) => {
       state.isLoading = false;
 
       state.login = {

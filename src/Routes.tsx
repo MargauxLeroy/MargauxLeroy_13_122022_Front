@@ -1,8 +1,16 @@
-import { Route } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom";
 import Index from "./pages/Index";
 import SignIn from "./pages/SignIn";
 import Profile from "./pages/Profile";
 import Error from "./pages/Error";
+
+export const router = createBrowserRouter(
+  createRoutesFromElements(getRoutes())
+);
 
 export function getRoutes() {
   return (

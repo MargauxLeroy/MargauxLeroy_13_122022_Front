@@ -16,8 +16,6 @@ function Profile() {
     (state) => state.auth.userData
   );
 
-  console.log("stateUserData", stateUserData);
-
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {

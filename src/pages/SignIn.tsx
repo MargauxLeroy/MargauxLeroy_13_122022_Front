@@ -11,17 +11,17 @@ import { AppState, useAppDispatch } from "../store/store";
 function SignIn() {
   const dispatch = useAppDispatch();
 
+  const [credentials, setCredentials] = useState<Credentials>({
+    email: "",
+    password: "",
+  });
+
   const errorMessage = useSelector<AppState, string | null>((state) => {
     if (state.auth.login.status === "DISCONNECTED") {
       return state.auth.login.error || null;
     }
 
     return null;
-  });
-
-  const [credentials, setCredentials] = useState<Credentials>({
-    email: "",
-    password: "",
   });
 
   return (
