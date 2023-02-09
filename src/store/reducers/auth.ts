@@ -141,23 +141,18 @@ const { actions: sliceActions, reducer: sliceReducer } = createSlice({
         lastName: action.payload.lastName,
       };
     });
-    // TODO: Rejected case
     builder.addCase(profile.rejected, (state, action) => {
       state.isLoading = false;
 
       state.login = {
         status: "DISCONNECTED",
         token: null,
-        error: "Unknown Error",
+        error: "L'adresse mail ou le mot de passe est incorrect",
       };
     });
     /// Update Profile
     builder.addCase(updateProfile.pending, (state) => {
       state.isLoading = true;
-      state.userData = {
-        firstName: "",
-        lastName: "",
-      };
     });
     builder.addCase(updateProfile.fulfilled, (state, action) => {
       state.isLoading = false;
@@ -166,7 +161,6 @@ const { actions: sliceActions, reducer: sliceReducer } = createSlice({
         lastName: action.payload.lastName,
       };
     });
-    // TODO: Rejected case
     builder.addCase(updateProfile.rejected, (state, action) => {
       state.isLoading = false;
 

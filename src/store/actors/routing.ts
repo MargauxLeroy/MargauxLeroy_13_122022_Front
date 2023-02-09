@@ -18,8 +18,7 @@ export const routingActor =
       router.navigate("/user");
     }
     if (login.rejected.match(action)) {
-      // TODO: Gérer le msg d'erreur
-      console.log("Gérer un msg erreur");
+      /// Message d'erreur géré dans le reducer
     }
     if (logout.match(action)) {
       router.navigate("/");

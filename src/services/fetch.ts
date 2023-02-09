@@ -3,7 +3,7 @@
  * @param uri
  * @returns { Promise<any> }
  */
-export const fetchData = async <T,>(
+export const fetchData = async <T>(
   uri: string,
   init?: RequestInit | undefined
 ): Promise<T> => {

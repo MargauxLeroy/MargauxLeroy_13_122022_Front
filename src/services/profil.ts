@@ -39,7 +39,7 @@ export const apiUpdateProfile = async (
   const uri = `${process.env.REACT_APP_API_V1_URL}/user/profile`;
 
   /// We send the new user data to the API
-  const response = await fetchData<UserDataExtended>(uri, {
+  const response = await fetchData<ProfileResponse>(uri, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -48,7 +48,5 @@ export const apiUpdateProfile = async (
     body: JSON.stringify(updatedUserData),
   });
 
-  console.log(response);
-
-  return response;
+  return response.body;
 };

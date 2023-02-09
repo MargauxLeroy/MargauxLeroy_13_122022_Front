@@ -5,12 +5,19 @@ import "./input.scss";
 
 type InputProps = {
   label?: string;
+  type?: string;
   withLabel?: boolean;
   placeholder?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 };
 
-function Input({ label, withLabel = true, placeholder, onChange }: InputProps) {
+function Input({
+  label,
+  type,
+  withLabel = true,
+  placeholder,
+  onChange,
+}: InputProps) {
   return (
     <div className="input-wrapper">
       {withLabel ? (
@@ -19,7 +26,7 @@ function Input({ label, withLabel = true, placeholder, onChange }: InputProps) {
         <></>
       )}
       <input
-        type="text"
+        type={type ?? "text"}
         id={label}
         placeholder={placeholder}
         onChange={onChange}

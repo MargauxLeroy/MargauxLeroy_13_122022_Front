@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { authActions } from "../store/reducers/auth";
 import Input from "../components/input/input";
 
-function User() {
+function Profile() {
   const dispatch = useDispatch();
 
   const stateUserData = useSelector<AppState, UserData | undefined>(
@@ -29,7 +29,7 @@ function User() {
     if (!stateUserData) return;
 
     setUserData(stateUserData);
-  }, [stateUserData, userData]);
+  }, [stateUserData]);
 
   let updateFirstName: string, updateLastName: string;
 
@@ -120,7 +120,7 @@ function User() {
   );
 }
 
-export default User;
+export default Profile;
 
 const tempData: AccountProps[] = [
   {

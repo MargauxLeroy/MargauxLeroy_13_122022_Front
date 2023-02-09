@@ -2,13 +2,22 @@ import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
 import Input from "../components/input/input";
 import Button from "../components/button/button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store/reducers/auth";
 import { Credentials } from "../services/login";
 import { useState } from "react";
+import { AppState } from "../store/store";
 
 function SignIn() {
   const dispatch = useDispatch();
+
+  const errorMessage = useSelector<AppState, string | null>((state) => {
+    if (state.auth.login.status === "DISCONNECTED") {
+      return state.auth.login.error || null;
+    }
+
+    return null;
+  });
 
   const [credentials, setCredentials] = useState<Credentials>({
     email: "",
@@ -24,13 +33,14 @@ function SignIn() {
           <h1>Sign In</h1>
           <form>
             <Input
-              label={"username"}
+              label="username"
               onChange={(e) =>
                 setCredentials({ ...credentials, email: e.target.value })
               }
             ></Input>
             <Input
-              label={"password"}
+              label="password"
+              type="password"
               onChange={(e) =>
                 setCredentials({ ...credentials, password: e.target.value })
               }
@@ -48,6 +58,7 @@ function SignIn() {
               label={"Sign In"}
               hugContent={false}
             ></Button>
+            {errorMessage != null && <p className="error">{errorMessage}</p>}
           </form>
         </section>
       </main>

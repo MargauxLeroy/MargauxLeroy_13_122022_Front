@@ -108,6 +108,10 @@
         display: flex;
         column-gap: 0.25em;
       }
+
+      .error {
+        color: red;
+      }
     }
   }
 }

@@ -2,7 +2,9 @@
 
 # Utilisez une API pour un compte utilisateur bancaire avec React
 
-Argent Bank : Tableau de bord de suivi sportif. Projet OpenClassrooms. Décembre-Janvier 2022/2023.
+Argent Bank.
+Utilisez une API pour un compte utilisateur bancaire avec React.
+Décembre-Janvier 2022/2023.
 
 ### Prerequisites
 
