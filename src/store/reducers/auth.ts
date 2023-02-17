@@ -55,17 +55,17 @@ const { actions: sliceActions, reducer: sliceReducer } = createSlice({
     builder.addCase(login.rejected, (state, action) => {
       state.isLoading = false;
 
-      if (action.payload instanceof Error) {
+      if (action.error.message) {
         state.login = {
           status: "DISCONNECTED",
           token: null,
-          error: action.payload.message,
+          error: action.error.message,
         };
       } else {
         state.login = {
           status: "DISCONNECTED",
           token: null,
-          error: "Unknown Error",
+          error: "Erreur inconnue",
         };
       }
     });

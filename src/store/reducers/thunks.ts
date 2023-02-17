@@ -12,12 +12,16 @@ import { AppState } from "../store";
 export const login = createAsyncThunk(
   "auth/login",
   async (credentials: Credentials) => {
-    /// On récupère le token depuis l'API à l'aide des identifiants
-    const token = await apiLogin(credentials);
+    try {
+      /// On récupère le token depuis l'API à l'aide des identifiants
+      const token = await apiLogin(credentials);
 
-    if (token == null) throw new Error("Empty token");
+      if (token == null) throw new Error("Empty token");
 
-    return token;
+      return token;
+    } catch (error) {
+      throw new Error("L'identifiant ou le mot de passe est incorrect");
+    }
   }
 );
 
